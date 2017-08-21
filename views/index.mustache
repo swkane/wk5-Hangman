@@ -18,18 +18,22 @@
           <h3>Mystery Word</h3>
           <h3>You have {{guesses}} guesses left</h3>
       </header>
-      <div class="">
-        {{displayWord}}
-      </div>
-      <div class="">
-        <form action='/guess' method='post'>
-          <input type="text" name="guess" value="" placeholder="Please enter 1 letter here">
-          <button type="submit" name="button">Make a guess</button>
-        </form>
-      </div>
-      <div class="">
-        Letters guessed: {{lettersGuessed}}
-      </div>
+      <main>
+        <div class="display-word">
+          {{#displayWord}}
+            {{.}}
+          {{/displayWord}}
+        </div>
+        <div class="make-guess">
+          <form action='/guess' method='post'>
+            <input type="text" name="guess" value="" placeholder="Enter 1 Letter Here" autofocus>
+            <button type="submit" name="button">Make a guess</button>
+          </form>
+        </div>
+        <div class="letters-guessed">
+          Letters guessed: {{lettersGuessed}}
+        </div>
+      </main>
     </div>
   </body>
 </html>

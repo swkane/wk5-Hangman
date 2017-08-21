@@ -1,4 +1,46 @@
 header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 100px;
+}
+
+main {
+  border: 1px solid black;
+  box-shadow: 5px 5px;
+  max-width: 70%;
+  margin: 0 auto;
+  padding: 30px;
+  display: flex;
+  align-content: space-between;
+  flex-direction: column;
+}
+
+/*body {
+  background-color: green;
+}*/
+
+.container {
+  text-align: center;
+}
+
+.display-word {
+  font-size: 1.4em;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+}
+
+.make-guess {
+  margin: 20px;
+}
+
+.end-message {
+  font-size: 1.2em;
+}
+
+.not-guessed {
+  color: red;
 }

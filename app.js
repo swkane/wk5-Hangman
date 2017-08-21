@@ -26,16 +26,20 @@ const words = fs.readFileSync("/usr/share/dict/words", "utf-8").toLowerCase().sp
 
 let game = {
   word: getWord(),
-  displayWord: "",
+  displayWord: [],
   guesses: 8,
   lettersGuessed: [],
-  endMessage: ""
+  endMessage: "",
+  missedLetters: []
 };
 
 
 app.get('/', function(req, res) {
   game.displayWord = wordHandler(game.word, game.lettersGuessed);
   if (isGameOver(res)) {
+    console.log(game.displayWord);
+    console.log(game.word);
+    game.missedLetters = getUnsuccesfulDisplayWord();
     res.render('gameOver', game);
   } else {
     res.render('index', game);
@@ -91,13 +95,25 @@ function isGameOver() {
   return false;
 }
 
+function getUnsuccesfulDisplayWord() {
+  const unsuccessfulDisplayWord = [];
+  for (let i = 0; i < game.word.length; i++) {
+    unsuccessfulDisplayWord.push({
+      letter: game.word[i],
+      className: game.word[i] === game.displayWord[i] ? "" : "not-guessed"
+    });
+  }
+  return unsuccessfulDisplayWord;
+}
+
 function newGame() {
   var newGame = {
     word: getWord(),
     displayWord: "",
     guesses: 8,
     lettersGuessed: [],
-    endMessage: ""
+    endMessage: "",
+    missedLetters: []
   };
   return newGame;
 }

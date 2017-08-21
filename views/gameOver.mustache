@@ -3,31 +3,36 @@
   <head>
     <meta charset="utf-8">
     <title>Hangman</title>
+    <link rel="stylesheet" href="/style.css">
   </head>
-  <style>
+  <!-- /*<style>
   header {
     display: flex;
     justify-content: space-between;
   }
-  </style>
+  </style>*/ -->
   <body>
     <div class="container">
       <header>
           <h3>Mystery Word</h3>
           <h3>You have {{guesses}} guesses left</h3>
       </header>
-      <div class="">
-        {{displayWord}}
-      </div>
-      <div class="">
-        <form action='/guess' method='post'>
-          <p>{{endMessage}}</p>
-          <button type="submit" name="button">Try Again</button>
-        </form>
-      </div>
-      <div class="">
-        Letters guessed: {{lettersGuessed}}
-      </div>
+      <main>
+        <div class="display-word">
+          {{#missedLetters}}
+          <span class="{{className}}">{{letter}}</span>
+          {{/missedLetters}}
+        </div>
+        <div class="make-guess">
+          <form action='/guess' method='post'>
+            <p class="end-message">{{endMessage}}</p>
+            <button type="submit" name="button">Try Again</button>
+          </form>
+        </div>
+        <div class="letters-guessed">
+          Letters guessed: {{lettersGuessed}}
+        </div>
+      </main>
     </div>
   </body>
 </html>
