@@ -30,7 +30,8 @@ let game = {
   guesses: 8,
   lettersGuessed: [],
   endMessage: "",
-  missedLetters: []
+  missedLetters: [],
+  endResult: ""
 };
 
 
@@ -52,8 +53,10 @@ app.post('/guess', function(req, res) {
     console.log(game.word);
     res.redirect('/');
   } else {
-    game.lettersGuessed.push(req.body.guess);
-    guessCount(req.body.guess);
+    if (!game.lettersGuessed.includes(req.body.guess)) {
+      game.lettersGuessed.push(req.body.guess);
+      guessCount(req.body.guess);
+    }
     res.redirect('/');
   }
 });
@@ -84,12 +87,19 @@ function guessCount(guess) {
   }
 }
 
+// function hasBeenGuessed(x) {
+//   let answer = game.lettersGuessed.find(function(element) {return element === guess});
+//   console.log(answer);
+// }
+
 function isGameOver() {
   if (game.guesses === 0) {
     game.endMessage = "You Lose!";
+    game.endResult = "failure";
     return true;
   } else if (!game.displayWord.includes("_")) {
     game.endMessage = "You Win!";
+    game.endResult = "success";
     return true;
   }
   return false;

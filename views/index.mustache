@@ -26,7 +26,7 @@
         </div>
         <div class="make-guess">
           <form action='/guess' method='post'>
-            <input type="text" name="guess" value="" placeholder="Enter 1 Letter Here" autofocus>
+            <input maxlength="1" type="text" name="guess" value="" placeholder="Enter 1 Letter Here" required autofocus>
             <button type="submit" name="button">Make a guess</button>
           </form>
         </div>
