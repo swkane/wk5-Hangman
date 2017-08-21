@@ -13,7 +13,8 @@ app.set('view engine', 'mustache');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static("public"));
+
 
 app.use(session({
   secret: 'keyboard gunther',
@@ -32,7 +33,6 @@ let game = {
 };
 
 
-
 app.get('/', function(req, res) {
   game.displayWord = wordHandler(game.word, game.lettersGuessed);
   if (isGameOver(res)) {
@@ -43,10 +43,15 @@ app.get('/', function(req, res) {
 });
 
 app.post('/guess', function(req, res) {
-  game.lettersGuessed.push(req.body.guess);
-  game.displayWord = wordHandler(game.word, game.lettersGuessed);
-  guessCount(req.body.guess);
-  res.redirect('/');
+  if (isGameOver()) {
+    game = newGame();
+    console.log(game.word);
+    res.redirect('/');
+  } else {
+    game.lettersGuessed.push(req.body.guess);
+    guessCount(req.body.guess);
+    res.redirect('/');
+  }
 });
 
 
@@ -84,6 +89,17 @@ function isGameOver() {
     return true;
   }
   return false;
+}
+
+function newGame() {
+  var newGame = {
+    word: getWord(),
+    displayWord: "",
+    guesses: 8,
+    lettersGuessed: [],
+    endMessage: ""
+  };
+  return newGame;
 }
 
 
