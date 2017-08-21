@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hangman</title>
+  </head>
+  <style>
+  header {
+    display: flex;
+    justify-content: space-between;
+  }
+  </style>
+  <body>
+    <div class="container">
+      <header>
+          <h3>Mystery Word</h3>
+          <h3>You have {{guesses}} guesses left</h3>
+      </header>
+      <div class="">
+        {{displayWord}}
+      </div>
+      <div class="">
+        <form action='/guess' method='post'>
+          <input type="text" name="guess" value="" placeholder="Please enter 1 letter here">
+          <button type="submit" name="button">Make a guess</button>
+        </form>
+      </div>
+      <div class="">
+        Letters guessed: {{lettersGuessed}}
+      </div>
+    </div>
+  </body>
+</html>
